@@ -1,0 +1,46 @@
+<!--!
+	viewperson
+	Created by Cosmin Stejerean on 2007-09-26.
+	Copyright (c) 2007 __MyCompanyName__. All rights reserved.
+-->
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      py:strip="">
+    <xi:include href="../base.html" />
+
+    <div id='content'>
+        <h1>${person.full_name}</h1>
+        
+        <table>
+        <tr><td colspan='2'><h2>Personal Information</h2></td></tr>
+        <tr>
+            <td><span class="data_label">Name: </span></td>
+            <td><span clsas="data_value">${person.full_name}</span></td>
+        </tr>
+        <tr>
+            <td><span class="data_label">Cell Phone: </span></td>
+            <td><span class="data_value">${person.cell_phone}</span></td>
+        </tr>
+        <tr>
+            <td><span class="data_label">Work Phone: </span></td>
+            <td><span class="data_value">${person.work_phone}</span></td>
+        </tr>
+        <tr>
+            <td><span class="data_label">Work Email: </span></td>
+            <td><span class='data_value'>${person.work_email}</span></td>
+        </tr>
+        </table>
+        <table>
+        <form method='GET' action="${h.url_for(controller='people', action='show', id=person.id)}">
+        <tr><td colspan='2'>
+        <INPUT TYPE='submit' VALUE='Edit'/></td>
+        </tr>
+        </form>
+        </table>
+    </div>
+
+</html>

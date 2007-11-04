@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
+<head>
+
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8">
+  <title>FoodFinder - Off by Two - Sample Application</title>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script scr="http://apps.offbytwo.com/foodfinder/static/prototype.js" type="text/javascript"></script>
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAARtPtbLaQ1s8spsEO-OWyVRSByyP_hiBM_ZSNvHPO6Ya-PpiUZxRzsRUBepEtkX3UeXIQnie3RjVKSw" type="text/javascript"></script>
+  <script type="text/javascript">
+    //<![CDATA[
+    // Creates a marker at the given point with the given number label
+    function createMarker(point, data) {
+        var marker = new GMarker(point);
+        GEvent.addListener(marker, "click", function() {
+            var window_html = "<b>" + data.name + "</b><br/>" +
+                              "Cuisine: " + data.cuisine + "<br/>" + 
+                              "Phone: " + data.phone + "<br/>" +
+                              "Address: " + data.address + "<br/>" +
+                              "Hours: " + data.hours + "<br/>"
+                              
+            marker.openInfoWindowHtml(window_html);
+        });
+        return marker;
+    }
+
+    var global_map;
+
+    function load() {
+        if (GBrowserIsCompatible()) {
+           var map = new GMap2(document.getElementById("map"));            
+           global_map = map;
+           map.addControl(new GLargeMapControl());
+           map.addControl(new GMapTypeControl());
+           map.setCenter(new GLatLng(41.884, -87.632), 11);
+        }
+    }
+    
+    function searchByName() {
+        var txt = document.getElementById('searchfield').value;
+	global_map.clearOverlays();
+        GDownloadUrl("search/q=" + txt, display_results);
+    }
+    
+    function display_results(doc) {
+        var map = global_map;
+	var jsonData = eval(doc);
+        var htmlListing = "<ul>\n";
+	for (var i=0; i<jsonData.length; i++) {
+          data = jsonData[i];
+          htmlListing = htmlListing + "<li>" + data.name + "</li>\n"
+          var lat = eval(data.lat);
+          var lng = eval(data.lng);
+          var point = new GLatLng(lat,lng);
+          var marker = createMarker(point, data);
+          map.addOverlay(marker);
+        }
+        document.getElementById('listing').innerHTML = htmlListing;
+    }
+
+//]]>
+  </script>
+</head>
+<body onload="load()" onunload="GUnload()">
+<table cellpadding=0 cellspacing=0 border=0>
+  <tr>
+    <td>
+      <!--a href=/><img src=/static/logo.gif border=0></a-->
+    </td>
+    <td width=10>
+    </td>
+    <td>
+      <table cellpadding=0 cellspacing=3 border=0>
+        <form action="">
+          <tr><td valign=bottom><font size=-1>Search by name, address or phone number</font></td>
+              <td><font size=-1>&nbsp;</font></td></tr>
+
+          <tr><td><input type='text' name='searchfield' id='searchfield' size=30 maxlength=512 value=""></td>
+              <td><input type='button' onClick="searchByName();" value="Search"></td></tr>
+        </form>
+     </table>
+    </td>
+  </tr>
+</table>
+
+<table cellspacing=0 cellpadding=0 border=0 width=100%>
+  <tr><td bgcolor=#ff9900><img width=1 height=1 alt=""></td></tr>
+  <tr><td bgcolor=#ffeac0><font size=+1><b>&nbsp;Food Finder</b></font></td></tr>
+</table>
+
+<table cellpadding=0 cellspacing=0 border=0>
+  <tr>
+  <td width=517 valign=top>
+    <table cellpadding=0 cellspacing=0 border=0>
+      <tr>
+
+      <td valign=top style="padding-top: 6px; padding-right: 15px" width=500 height=500 id=mapsect>
+      <div id="map" style="border: 1px solid #979797; width: 700px; height: 500px">Loading...</div>
+      </td>
+      </tr>
+      <tr>
+      <td valign=top align=center style="padding-top: 5px; padding-right: 15px">
+      
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td height=500 valign=top style="padding-top: 6px">
+    <table height=500 cellpadding=0 cellspacing=0 border=0>
+    <tr><td valign=top id="listing">
+    Enter something in the search box. You can only search by restaurant name, I'll work on making the search more flexible soon. Press the Search button, don't hit ENTER as that will simply reload the page (I'll fix this soon too).
+    </td></tr>
+
+    <tr><td valign=bottom id=local>
+    
+    </td></tr>
+    </table>
+  </td>
+  </tr>
+</table>
+
+<br>
+<div align=center><font size=-1 class=p>&copy;2007 Cosmin Stejerean (<a href="http://www.offbytwo.com">www.offbytwo.com</a>)</font></div>
+
+</body>
+</html>

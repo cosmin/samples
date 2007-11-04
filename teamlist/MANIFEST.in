@@ -1,0 +1,2 @@
+recursive-include teamlist/public *
+recursive-include teamlist/templates *

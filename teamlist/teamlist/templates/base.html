@@ -1,0 +1,29 @@
+<!--!
+	base
+	Created by Cosmin Stejerean on 2007-09-26.
+	Copyright (c) 2007 Cosmin Stejerean. All rights reserved.
+-->
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <head>
+        ${h.stylesheet_link_tag('layout')}
+        ${h.javascript_include_tag(builtins=True)}
+        ${h.javascript_include_tag('jquery-1.2.1.js')}
+        <title>Teamlist 0.1a</title>
+    </head>
+    <body>
+        <div id='header'><div id='title'>Teamlist</div></div>
+         <div id='content' py:replace='body'>Content placeholder</div>
+         <div id='navAlpha'>
+            <h2>Links</h2>
+            <p>
+                ${h.link_to('Browse People', url=h.url_for(controller='people'))}<br/>
+                ${h.link_to('New Person', url=h.url_for(controller='people', action='new'))}<br/>
+            </p>
+        </div>
+    </body>
+</html>

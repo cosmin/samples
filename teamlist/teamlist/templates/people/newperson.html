@@ -1,0 +1,47 @@
+<!--!
+	newperson
+	Created by Cosmin Stejerean on 2007-09-26.
+	Copyright (c) 2007 Cosmin Stejerean. All rights reserved.
+-->
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      py:strip="">
+    <xi:include href="../base.html" />
+    
+    <div id='content'>
+        <h1>New Person</h1>
+        
+        <table>
+            <form action="${h.url_for(controller='people', action='create')}" method='POST' enctype='multipart/form-data'>
+        <tr><td colspan='2'><h2>Personal Information</h2></td></tr>
+        <tr><td><span class="form_label">Name: </span></td>
+            <td><INPUT TYPE='text' NAME='full_name' VALUE=''/></td>
+        </tr>
+        <tr><td width='150px'>Upload Picture:</td>
+            <td><INPUT TYPE='file' NAME='picture'/></td>
+        </tr>
+
+        <tr><td colspan='2'><h2>Phone Number</h2></td></tr>
+        <tr><td><span class="form_label">Cell: </span></td>
+            <td><INPUT TYPE='text' NAME='cell_phone' VALUE=''/></td>
+        </tr>
+        <tr><td><span class="form_label">Work: </span></td>
+            <td><INPUT TYPE='text' NAME='work_phone' VALUE=''/></td>
+        </tr>
+
+        <tr><td colspan='2'><h2>Email Address</h2></td></tr>
+        <tr><td><span class="form_label">Work: </span></td>
+            <td><INPUT TYPE='text' NAME='work_email' VALUE=''/></td>
+        </tr>
+        <tr><td></td></tr>
+        <tr><td><INPUT TYPE='submit' VALUE='Create'/></td><td></td>
+        </tr>
+        </form>
+        </table>
+    </div>
+      
+</html>

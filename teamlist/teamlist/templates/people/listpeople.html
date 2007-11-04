@@ -1,0 +1,32 @@
+<!--!
+	listpeople
+	Created by Cosmin Stejerean on 2007-09-26.
+	Copyright (c) 2007 __MyCompanyName__. All rights reserved.
+-->
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      py:strip="">
+      <xi:include href="../base.html" />
+      
+    <div id='content'>
+        <div py:for='person in people' class='personrow'>
+            <div class='listing_image'><img src='${person.picture}' width='100' height='100'/></div>
+            <div class='listing_content'>
+                <div class='listing_name'>${h.link_to(person.full_name, url=h.url_for(controller='people', action='edit', id=person.id))}</div>
+                <div class='listing_phone'>
+                    <span class='cellphone' py:if="person.cell_phone">
+                        <span class='info_type'>Cell:</span> <span class='info_value'>${person.cell_phone}</span>
+                    </span>
+                    <span class='workphone' py:if="person.work_phone">
+                        <span class='info_type'>Work:</span> <span class='info_value'>${person.work_phone}</span>
+                    </span>
+                </div>
+                <div class='workemail'><span>${person.work_email}</span></div>
+            </div>
+        </div>
+    </div>
+</html>
