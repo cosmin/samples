@@ -164,7 +164,13 @@
 (defmacro define-binary-type (name (&rest args) &body spec)
   (ecase (length spec)
     (1
-     (with-gensyms (type stream args)))
+     (with-gensyms (type stream value)
+       (destructuring-bind (derived-from &rest derived-args) (mklist (first spec))
+	 `(progn
+	    (defmethod read-value ((,type (eql ',name)) ,stream &key ,@args)
+	      (read-value ',derived-from ,stream ,@derived-args))
+	    (defmethod write-value ((,type (eql ',name)) ,stream ,value &key ,@args)
+	      (write-value ',derived-from ,stream ,value ,@derived-args))))))
     (2
      (with-gensyms (type)
        `(progn
