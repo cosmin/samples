@@ -1,0 +1,18 @@
+Title:
+  dbreloader plugin for nose
+
+Author:
+  Cosmin Stejerean (http://blog.offbytwo.com)
+
+Description:
+  This is a plugin for nose that will save one or more databases and restore them
+  after the tests complete. 
+
+Options:
+  --dbdump-databases : list of databases oto dump
+  --dbdump-dsn : dsn in the format mysql://[user:[password]@]host[:port]
+  --dbdump-keep : don't delete the database dump (optional)
+  --dbdump-output : file to save the output to (optional, random default)
+
+Example:
+  nosetests --dbdump-databases=db1,db2 --dbdump-dsn=mysql://root:password@localhost:1234 --dbdump-keep
