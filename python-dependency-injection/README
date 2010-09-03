@@ -1,0 +1,21 @@
+A dependency injection container for Python. Highly contrived example:
+
+from IoC import *
+
+@component('foo')
+class Foo(object):
+      bar = Inject('bar')
+
+      def do_stuff(self):
+          bar.do_stuff()
+
+@component('bar')
+class Bar(object):
+    @inject(baz='baz')
+    def do_stuff(self, baz):
+        baz.done()
+
+@component('baz')
+class Baz(object):
+    def done(self):
+        print 'Done with baz'
