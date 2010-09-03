@@ -1,0 +1,8 @@
+This project is based on pytailer, therefore it is released under the GPL.
+
+logstreamer.py - tails a file and streams the contents over the network
+receiver.py - runs a simple tcp server and prints the received contents
+
+
+I wrote this because I had to stream log files on Windows where I didn't have
+useful utilities like netcat and tail.
